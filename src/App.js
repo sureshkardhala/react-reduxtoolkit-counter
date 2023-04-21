@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
-
+import { useSelector, useDispatch } from 'react-redux';
+import {actions} from './store/index';
 function App() {
+ 
+  const counter = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
+  const handleIncrement = () => {
+    dispatch(actions.increment());
+  }
+  const handleDecrement = () =>{
+    dispatch(actions.decrement())
+  }
+  const addBy = ()=>{
+    dispatch(actions.addBy(10));
+  }
+
+  const subBy = ()=>{
+    dispatch(actions.subBy(10));
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Counter : <span className= {counter <0 ? "danger" : "success"}>&nbsp;{counter}</span></h1>
+      <button className='btn btn-inc' onClick={handleIncrement}>Increment</button> &nbsp;
+      <button className='btn btn-dec' onClick={handleDecrement}>Decrement</button>  &nbsp;
+      <button className='btn btn-add' onClick={addBy}>Add By 10</button>  &nbsp;
+      <button className='btn btn-sub' onClick={subBy}>Subtract By 10</button>  &nbsp;
     </div>
   );
 }
